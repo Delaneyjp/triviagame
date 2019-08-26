@@ -63,8 +63,12 @@ $(document).ready(function () {
             }
         },
 
+        // when start button is closed data is pulled for questionlist and shown where the ID is triviascreen
         start: () => {
             timer = setInterval(game.countdown, 1000);
+            $("#correctAnswers").html(game.correct);
+            $("#incorrectAnswers").html(game.incorrect);
+
 
             $("#triviaBoard").prepend(
                 `<p>Time Remaining: <span id='counter-number'>90</span> Seconds</p>`
@@ -81,6 +85,7 @@ $(document).ready(function () {
             questionList.append("<br><br><br><button class='btn btn-success' id='complete'>Complete</button>");
         },
 
+        //loop through answer choices. if the checked radio button has the same value as the correct answer, then it is correct. Add 1 to correct. And vise versa for the inputs that do not match. Add 1 to incorrect.
         done: () => {
             var inputs = questionList.children("input:checked");
             for (var i = 0; i < inputs.length; i++) {
@@ -92,6 +97,7 @@ $(document).ready(function () {
             }
             this.result();
         },
+
         result: () => {
             clearInterval(timer);
 
